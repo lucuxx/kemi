@@ -28,7 +28,7 @@ export default new Router({
       {path:"accountManager",
       name:"用户管理",
       component: () => import(/* webpackChunkName: "accountManager" */ '@/components/accountManager'),
-      },
+     },
       {path:"LotteryManage",
       name:"彩票列表",
       component: () => import(/* webpackChunkName: "LotteryManage" */ '@/components/LotteryManage'),

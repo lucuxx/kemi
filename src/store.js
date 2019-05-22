@@ -36,10 +36,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    navList: [], //获取当前用户的权限(导航)
-    navRoles: [], //获取当前的用户类型
+    navList: [], //获取当前角色的权限(导航)
+    navRoles: [], //获取当前的角色类型
     allPermissions:[], //获取所有的权限
-    allUser:[], //获取所有的用户
+    allUser:[], //获取所有的角色
+    allAccount:[], //获取所有的用户信息(username,password)
 
   },
 
@@ -56,6 +57,9 @@ export default new Vuex.Store({
     },
     allPermissions(state){
       return navData(state.allPermissions)
+    },
+    allAccount(state){
+      return state.allAccount
     }
    
     
@@ -66,6 +70,9 @@ export default new Vuex.Store({
     },
     ALLPERMISSIONS(state,payload){
       state.allPermissions=payload.allPermission;
+    },
+    ALLACCOUNT(state,payload){
+      state.allAccount=payload.allUsers;
     }
 
 
@@ -82,7 +89,12 @@ export default new Vuex.Store({
         .then((resp)=>{
           context.commit("ALLPERMISSIONS",resp.data)
         })
-
+    },
+    allAccount({commit},payload){
+      axios.get(apis.findAllUsers)
+      .then((resp)=>{
+        commit("ALLACCOUNT",resp.data)
+      })
     }
     
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="juese">
+  <div class="RoleManage">
     <el-table :data="userList" style="width: 100%">
       <el-table-column label="角色名称" prop="data"></el-table-column>
       <el-table-column label="角色描述" prop="name"></el-table-column>
@@ -40,10 +40,11 @@
         <el-tree
           :data="allPermissions"
           show-checkbox
-          node-key="permissionDesc"
+          node-key="_id"
           :props="defaultProps"
-          ref="permissions"
+          ref="tree"
         ></el-tree>
+        
       </el-form>
 
       <span slot="footer" class="dialog-footer">
@@ -52,8 +53,6 @@
       </span>
     
     </el-dialog>
-    <!-- 信息提示 -->
-
     
 
   </div>
@@ -76,7 +75,7 @@ export default {
       userInfo: {
           roleName:"",
           roleDesc:"",
-          // permissions:"",
+          permissions:[],
       },
      
       rules: {
@@ -104,7 +103,8 @@ export default {
     },
     //从getters获取数据
      ...mapGetters(["allUser"]),
-     ...mapGetters(["allPermissions"])
+     ...mapGetters(["allPermissions"]),
+   
   },
 
   mounted(){
@@ -153,7 +153,9 @@ export default {
     },
     // 新增角色提交数据
     commitData(){
-       this.$http.post(this.$apis.addNewRole,this.userInfo)
+        this.userInfo.permissions=this.$refs.tree.getCheckedKeys();
+
+        this.$http.post(this.$apis.addNewRole,this.userInfo)
       .then((resp)=>{
         // 根据点击提交结果,触发提示弹框
          this.$message({
@@ -164,10 +166,8 @@ export default {
        this.$store.dispatch("allUser")
      
       })
-        // this.permissions=this.$refs.permissions.getCheckedKeys();
        this.dialogVisible = false;
        this.userInfo={};
-      
      },
      cancelCommit(){
         this.dialogVisible = false;

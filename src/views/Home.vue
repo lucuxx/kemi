@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <div class="headerBar">
-        <el-button type="danger" round @click="closeBtn">注 销</el-button>
+        <el-button type="danger" round @click="closeBtn">
+          <i class="el-icon-warning-outline"></i> 注 销
+          </el-button>
     </div>
     <div class="container">
       <div class="leftNav">
