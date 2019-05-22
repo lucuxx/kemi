@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <div class="headerBar"></div>
+    <div class="headerBar">
+        <el-button type="danger" round @click="closeBtn">注 销</el-button>
+    </div>
     <div class="container">
       <div class="leftNav">
         <navBar/>
@@ -18,8 +20,14 @@ import navBar from "@/components/navBar";
 export default {
   components: {
     navBar
+  },
+  methods:{
+    closeBtn(){
+      this.$router.push({name:"login"});
+      localStorage.clear();
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -35,13 +43,20 @@ export default {
   bottom: 0;
 }
 .headerBar {
+  display:flex;
+  justify-content: flex-end;
+  align-items:center;
   width: 100%;
   height: 15%;
-  background: skyblue;
+  padding-right:60px;
+  box-sizing:border-box;
+  background:linear-gradient(45deg,skyblue,pink);
+
 }
+
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width:100%;
   height:85%;
@@ -49,11 +64,14 @@ export default {
 .leftNav {
   width: 20%;
   height: 100%;
-  background: greenyellow;
+  background: #545c64;
+  box-sizing:border-box;
 }
 .rightMain {
-  width: 80%;
+  width: 79.9%;
   height: 100%;
   background: gainsboro;
+  padding:15px;
+  box-sizing:border-box;
 }
 </style>

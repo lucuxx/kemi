@@ -18,8 +18,10 @@
             <el-form-item  label="密码:" prop="password">
                 <el-input type="password" v-model="userInfo.password"></el-input>
             </el-form-item>   
-        </el-form> 
-        <el-button type="primary" @click="login">登 录</el-button>
+             <el-form-item>
+                 <el-button type="primary" @click="login" style="width:200px;">登 录</el-button>
+             </el-form-item>
+        </el-form>  
        </div>
       </div>
     </div>
@@ -53,13 +55,13 @@ export default {
               console.log(resp)
                 var token=resp.data.token;
                 var success=resp.data.success;
-                var permissions=resp.data.response.permissions;
+                var response=resp.data.response;
               
                 // 如果登录成功
                 if(success){
                      // 保存token
                     localStorage.setItem("token",token);
-                    localStorage.setItem("permissions",JSON.stringify(permissions));
+                    localStorage.setItem("response",JSON.stringify(response));
                     
                     var query = this.$route.query;
                     

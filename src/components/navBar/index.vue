@@ -6,23 +6,21 @@
 
        <el-col>
           <el-menu
-      default-active="2"
+      default-active="1"
       class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
+ 
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-submenu :index="(index+1)+''" v-for="(item,index) in navName" :key="index">
+      <el-submenu :index="key+''" v-for="(item,key) in navList" :key="key._id">
         <template slot="title">
           <i class="el-icon-menu"></i>
-          <span>{{item}}</span>
+          <span>{{item.permissionDesc}}</span>
         </template>
-        <el-menu-item-group>
-          <!-- <template slot="title">分组一</template> -->
-          <el-menu-item index="1-1"  @click="pushView(item)">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
+          <el-menu-item :index="key+'-'+index" v-for='(item,index) in item.children' :key="index._id" @click="pushView(item)">
+            {{item.permissionDesc}}
+          </el-menu-item>
+   
       </el-submenu> 
     </el-menu>
   </el-col>
@@ -31,35 +29,27 @@
 </template>
 
 <script>
+import {mapState,mapGetters} from "vuex"
 export default {
+  computed:{    
+     ...mapGetters(["navList"])
+  },
   data() {
     return {
-      navList: [],
-      navName: []
-    };
+     
+    }
   },
   created() {
-    var navlist = JSON.parse(localStorage.getItem("permissions"));
-    this.navList = navlist;
-    for (let i = 0; i < navlist.length; i++) {
-      if (navlist[i].parentid == 0) {
-        this.navName.push(navlist[i].permissionDesc);
-      }
-    }
+ 
   },
 
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    pushView(item){
-      this.$router.push({name:"jueseguanli"});
-    }
+      pushView(item){
+            this.$router.push({name:item.permissionDesc})
+      }
   }
-};
+}
+
 </script>
 
 <style lang="scss" scoped>
