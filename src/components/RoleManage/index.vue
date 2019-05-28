@@ -46,7 +46,6 @@
         ></el-tree>
         
       </el-form>
-
       <span slot="footer" class="dialog-footer">
         <el-button @click="cancelCommit">取 消</el-button>
         <el-button type="primary" @click="commitData">确 定</el-button>

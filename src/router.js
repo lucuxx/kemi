@@ -29,10 +29,16 @@ export default new Router({
       name:"用户管理",
       component: () => import(/* webpackChunkName: "accountManager" */ '@/components/accountManager'),
      },
-      {path:"LotteryManage",
-      name:"彩票列表",
-      component: () => import(/* webpackChunkName: "LotteryManage" */ '@/components/LotteryManage'),
-      }
+     {path:"LotteryManage",
+     name:"彩票列表",
+     component: () => import(/* webpackChunkName: "LotteryManage" */ '@/components/LotteryManage'),
+     },
+     {path:"lotteryList/:lotteryName",
+     name:"彩票信息",
+     component: () => import(/* webpackChunkName: "lotteryList" */ '@/components/lotteryList/lotteryList.vue'),
+     },
+     
+     
       ]
     },
    

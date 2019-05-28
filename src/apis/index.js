@@ -12,6 +12,9 @@ var apis={
     deleteUser:"/system/user/deleteUser", //post 删除用户
     updateUserInfo:"/system/user/updateUserInfo", //post 更新用户
     addNewPersmission:"/system/permission/addNewPersmission", //新增权限
+    findAllGames:"/gameManage/games/findAllGames", // get 获取所有的彩种
+    findByGameName:"/gameManage/games/findByGameName", //获取相应的彩种信息
+    addNewGame:"/gameManage/games/addNewGame", // post增加游戏种类
 
 }
 

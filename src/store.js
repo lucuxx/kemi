@@ -41,7 +41,8 @@ export default new Vuex.Store({
     allPermissions:[], //获取所有的权限
     allUser:[], //获取所有的角色
     allAccount:[], //获取所有的用户信息(username,password)
-
+    findAllGames:[], //获取所有的彩种玩法
+    // findByGameName:[], //获取所有的彩票信息
   },
 
   getters:{
@@ -60,7 +61,13 @@ export default new Vuex.Store({
     },
     allAccount(state){
       return state.allAccount
-    }
+    },
+    findAllGames(state){
+      return state.findAllGames;
+    },
+    // findByGameName(state){
+    //   return state.findByGameName;
+    // }
    
     
   },
@@ -73,7 +80,13 @@ export default new Vuex.Store({
     },
     ALLACCOUNT(state,payload){
       state.allAccount=payload.allUsers;
-    }
+    },
+    FINDALLGAMES(state,payload){  
+      state.findAllGames=payload.data[0].games;
+    },
+    // FINDBYGAMENAME(state,payload){
+    //   state.findByGameName=payload.data;
+    // }
 
 
   },
@@ -95,8 +108,18 @@ export default new Vuex.Store({
       .then((resp)=>{
         commit("ALLACCOUNT",resp.data)
       })
-    }
-    
-
+    },
+    findAllGames({commit},payload){
+      axios.get(apis.findAllGames)
+      .then((resp)=>{
+        commit("FINDALLGAMES",resp.data)
+      })
+    },
+    // findByGameName(context,payload){
+    //   axios.get(apis.findByGameName,{params:payload})
+    //   .then((resp)=>{
+    //     context.commit("FINDBYGAMENAME",resp.data)
+    //   })
+    // }
   }
 })

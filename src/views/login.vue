@@ -52,7 +52,7 @@ export default {
           if (valid) {
             this.$http.post(this.$apis.signin,this.userInfo)
             .then((resp)=>{
-              console.log(resp)
+           
                 var token=resp.data.token;
                 var success=resp.data.success;
                 var response=resp.data.response;
